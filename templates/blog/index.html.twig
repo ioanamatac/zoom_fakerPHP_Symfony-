@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!{% endblock %}
+
+{% block body %}        
+        <div class="container">
+             <section class="articles">
+                {% for article in articles %}
+                    <article>
+                    <!-- Card Regular -->
+                        <div class="card card-cascade mt-3">
+                             <!-- Card content -->
+                            <div class="card-body card-body-cascade">
+                                <!-- Title -->
+                                <h4 class="card-title"><strong>{{ article.title }}</strong></h4>
+                                <h4 class="card-image"><img src=" {{ article.image }}" alt=""></h4>                                
+                                <!-- Text -->
+                                <p class="card-text">Article écrit le {{ article.createdAt| date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la <i>Categorie </i>{{ article.category }}: </p> 
+                                    {% for category in article.category %}
+                                        {{ category.title }}
+                                    {% endfor %}                                    
+                                <p class="card-content"><i class="fas fa-quote-left pe-2"></i>{{ article.content }} </p><br />
+                                    {% for comment in article.comments %}
+                                        <p class="card-text"><i>Commentaire</i> écrit le {{ comment.createdAt| date('d/m/y') }} à {{comment.createdAt| date('H:i')}} par {{ comment.author }} <i class="fas fa-user-ninja vanished"></i>:</p>                                    
+                                        <p class="card-content"> {{ comment.content }}
+                                    {% endfor %}
+                                <div><a href="{{ path('blog_show', {'id': article.id }) }}" class="btn btn-dark">Lire la suite</a></div>                                                               
+                            </div>                         
+                        </div>
+                    </article>            
+                {% endfor %}
+                {{ knp_pagination_render(articles) }}           
+
+             </section> 
+        </div>       
+{% endblock %}
+                           
+                   

@@ -1,0 +1,27 @@
+ {% extends 'base.html.twig' %}
+ {% block title %} Article {% endblock %}
+
+{% block body %}
+        <div class="container">
+            <section>
+                <article >                                      
+                    <!-- Card Regular -->
+                    <div class="card card-cascade mt-2">
+                            <!-- Card content -->
+                            <div class="card-body card-body-cascade">
+                            <!-- Title -->
+                            <h4 class="card-title"><strong>{{ article.title }}</strong></h4>  
+                            <img src="{{ article.image }}" alt="">                              
+                            <!-- Text -->
+                            <p class="card-text">Ecrit le {{ article.createdAt| date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la <i>Categorie</i>{{ article.category }} : </p>                               
+                            <p class="card-content"><i class="fas fa-quote-left pe-2"></i> {{ article.content }}</p>
+                                {% for comment in article.comments %}
+                                        <p class="card-text"><i>Commentaire</i> écrit le {{ comment.createdAt| date('d/m/y') }} à {{ comment.createdAt| date('H:i')}} par <i class="fas fa-user-ninja vanished"></i>:</p>                                    
+                                        <p class="card-content"> {{ comment.content }}
+                                {% endfor %}
+                            <div><a href="{{ path('blog', {'id': article.id }) }}" class="btn btn-dark">Go back</a></div>                                                        
+                    </div>                                                               
+                </article>                        
+            </section>        
+        </div>
+    {% endblock %}

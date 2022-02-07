@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formArticle 'bootstrap_5_layout.html.twig' %}
+
+{% block title %} Creation d'un article {% endblock %}
+
+{% block body %} 
+    <div class="container mt-3 ">
+        <h3>Creation d'un article</h3>
+        <div class="form-row ">
+            <div class="form-group col-md-4 ">
+                {{ form_start(formArticle) }}
+                {{ form_widget(formArticle) }}
+                    <button class="btn btn-success">
+                        {% if editMode %}
+                            Enregistrer les modifications
+                        {% else %}
+                            Ajouter article
+                        {% endif %}
+                    </button>
+                {{ form_end(formArticle) }}
+            
+            </div>
+        </div>
+    </div>        
+
+{% endblock %}
